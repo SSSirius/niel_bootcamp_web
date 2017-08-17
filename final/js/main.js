@@ -28,7 +28,7 @@ function hideW(){
 }
 
 
-var stopTooltip = false;	
+// var stopTooltip = false;	
 //Planet orbit variables
 //The larger this is the more accurate the speed is
 var resolution = 1, //perhaps make slider?
@@ -50,12 +50,7 @@ var svg = d3.select("body")
 //Create a container for everything with the centre in the middle
 var container = svg.append("g").attr("class","container")
 					.attr("transform", "translate( " + x/2 + "," + y/2 + ")")
-					// .attr("transform", "rotateX(-90deg)");
-					// .attr("transform", "translate3d(" + x/2 "," + y/2 + ","+ 0 + " )");
-					// .attr("transform", "translateY(" + y/2 + ")");
-  
-//Create star in the Middle - scaled to the orbits
-//Radius of our Sun in these coordinates (taking into account size of circle inside image)
+					//Radius of our Sun in these coordinates (taking into account size of circle inside image)
 var ImageWidth = radiusSun/au * 3000 * (2.7/1.5);
 
 
@@ -83,12 +78,6 @@ var planets =[
 				{name:"saturn",index:5,Radius:80,orbit:132,speed:0.05,x:132,y:66,href:"img/saturn.png"},
 				{name:"uranus",index:6,Radius:20,orbit:292,speed:0.0177,x:-292,y:-147.55,href:"img/uranus.png"},
 				{name:"neptune",index:7,Radius:20,orbit:350,speed:0.009,x:350,y:175,href:"img/neptune.png"}
-				// {name:"saturn",Radius:60,orbit:300,speed:0.05,x:-300,y:-300,href:"img/saturn.png"},
-				// {name:"jupiter",Radius:28,orbit:174.7,speed:0.127,x:-174.7,y:-174.7,href:"img/jupiter.png"},
-				// {name:"mars",Radius:15,orbit:67,speed:0.8,x:-67,y:-67,href:"img/mars.png"},
-				// {name:"earth",Radius:15,orbit:52.4,speed:1.5,x:-52.4,y:-52.4,href:"img/earth.png"},
-				// {name:"venus",Radius:15,orbit:43.7,speed:2.43,x:-43.7,y:-43.7,href:"img/venus.png"},
-				// {name:"mercury",Radius:15,orbit:35,speed:6.2,x:-35,y:-35,href:"img/mercury.png"}
 				];
 
 
@@ -155,23 +144,8 @@ var planetContainer = container.append("g").attr("class","planetContainer");
 				.attr("height", function(d) {return d.Radius} )
 				.attr("text-anchor", "middle")
 				.on("click", pause)
-				// function scaleLarge(d){
-		
-				// }
-				// function planetOver(d){
-				// 	// orbit.stop();
-				// 	// d3.select(this).style("fill-opacity", 0.1);
-				// 	d3.select(this).style("stroke", "white")
-				// 	.style("stroke-width", "2px")
-				// 	// d3.selectAll(".container").attr("transform", "translate(" + this.cx + "," + this.cy+ ")");
-				// }
-				// function planetOut(){
-				// 	d3.select(this).style("stroke", "#bbb")
-				// 	.style("stroke-width", "0.5px")
-				// 	// d3.select(this).style("fill-opacity", 0);
-				// 	// Draw1();
-				// 	// d3.select(this).style("background","#fff");
-				// }
+			
+			
 				planetContainer.append("g:image")
 	.attr("x", -ImageWidth*1.2)
 	.attr("y", -ImageWidth*1.2)
@@ -211,10 +185,7 @@ function startCircle(time) {
 				return arc(d);
 		   }//return
 		})
-		// .call(endall, function() {
-		// 	d3.select(".progressWrapper")
-		// 		.style("pointer-events", "auto");
-		// });
+	
 };
 
  
@@ -239,27 +210,22 @@ var countstep= 0;
 	// var orbitid = d3.selectAll(".orbit")[0][d];	
 		if(isstart)
 			{isstart = false;
-				// var x1= Number(d3.select(this).attr("x"));
-				// var y1=Number(d3.select(this).attr("y"));
+				
 				d3.select("#tooltip")
 				.transition().duration(400)
 				.style("visibility", "visible")
 				.style("top", y + newy +"px")
 				.style("left", x+ newx +"px");
-				 // console.log(y + newx);
-				 // console.log(pl);
+				
 		 	    d3.select(".tooltip-cancel").style("visibility", "hidden");
 
-             // d3.select(this).style("fill-opacity", 0.1);
-				// d3.select("#"+ orbitid).style("stroke", "white")
-					      // .style("stroke-width", "2px");
 					      d3.selectAll(".orbit")
 					      .filter(function (d, i){if(i==7-ind){return d}})
 					      .style("stroke", "white")
 					      .style("stroke-width", "2px");
-					      console.log(    d3.selectAll(".orbit").filter(function (d, i) { return i === d;}));
+					      // console.log(d3.selectAll(".orbit").filter(function (d, i) { return i === ind;}));
 //intro of it.  
-				d3.select(".tooltip-Container").attr("onclick", "detailInfo("+d+")");
+				d3.select(".tooltip-Container").attr("onclick", "detailInfo("+ind+")");
 				d3.select("#tooltip .tooltip-planet").text(pinfo.name +"  " +pinfo.symbol);
 				d3.select("#tooltip .tooltip-symbol").html();
 				d3.select("#tooltip-radius").html(pinfo.speed);
@@ -315,30 +281,23 @@ var countstep= 0;
 
 		}
 
-// console.log(countstep);
-//Scaling radii	
+
 function Draw1() {
-   
-	// startCircle(time = 5);
    
 		
 	d3.selectAll(".planet")
 		// .transition().delay(700 * 2).duration(2000)
 		.attr("x", function(d) {
 			var newRadius = -d.x*2.2 * Math.sin(counter*d.speed*Math.PI/180)-d.Radius/2;
-			// console.log(countstep);
-			// if  (newRadius > 500) {return 0;}
-			// else {
+			
 				return newRadius;
 			// }
 		})
 		.attr("y", function(d) {
 			var newRadius = -d.y*1.5* Math.cos(counter*d.speed*Math.PI/180)-d.Radius/2;
-			// console.log(d3.select(".progressWrapper"));
-			// if  (newRadius > 500) {return 0;}
-			// else {
+			
 				return newRadius;
-			// }
+			
 		});
 		// console.log(isstart);
 		if (isstart){
@@ -348,61 +307,3 @@ function Draw1() {
        }
 
 
-		//Show the tooltip on hover
-		// function showTooltip(d) {	
-		// 	//Show how to close tooltip
-		// 	d3.select("#tooltipInfo").style("visibility", "visible");
-			
-		// 	//Make a different offset for really small planets
-		// 	//var Offset = (rScale(d.Radius)/2 < 2) ? 3 : rScale(d.Radius)/2;
-		// 	var xOffset = ((10*d.Radius)/2 < 3) ? 6 : (10*d.Radius)/2;
-		// 	var yOffset = ((10*d.Radius)/2 < 3) ? 0 : (10*d.Radius)/2;
-
-		// 	//Set first location of tooltip and change opacity
-		// 	var xpos = d.x + x/2 - xOffset + 3;
-		// 	var ypos = d.y + y/2 - yOffset - 5;
-			  
-		// 	d3.select("#tooltip")
-		// 		.style('top',ypos+"px")
-		// 		.style('left',xpos+"px")
-		// 		.transition().duration(500)
-		// 		.style('opacity',1);
-				
-		// 	//Keep the tooltip moving with the planet, until stopTooltip 
-		// 	//returns true (when the user clicks)
-		// 	d3.timer(function() { 
-		// 	  xpos = d.x + x/2 - xOffset + 3;
-		// 	  ypos = d.y + y/2 - yOffset - 5;
-			  
-		// 	 //Keep changing the location of the tooltip
-		// 	 d3.select("#tooltip")
-		// 		.style('top',ypos+"px")
-		// 		.style('left',xpos+"px");
-			
-		// 		//Breaks from the timer function when stopTooltip is changed to true
-		// 		//by another function
-		// 		if (stopTooltip == true) { 
-		// 			//Hide tooltip info again
-		// 			d3.select("#tooltipInfo").style("visibility", "hidden");
-		// 			//Hide tooltip
-		// 			d3.select("#tooltip").transition().duration(300)
-		// 				.style('opacity',0)
-		// 				.call(endall, function() { //Move tooltip out of the way
-		// 					d3.select("#tooltip")
-		// 						.style('top',0+"px")
-		// 						.style('left',0+"px");
-		// 				});	
-		// 			//Remove show how to close
-		// 			return stopTooltip;
-		// 		}
-		// 	});
-		
-		// 	//Change the texts inside the tooltip
-		// 	d3.select("#tooltip .tooltip-planet").text(d.name);
-		// 	d3.select("#tooltip .tooltip-year").html("Discovered in: " + d.discovered);
-		// 	//d3.select("#tooltip-class").html("Temperature of star: " + d.temp + " Kelvin");
-		// 	d3.select("#tooltip-period").html("Orbital period: " + formatSI(d.period) + " days");
-		// 	d3.select("#tooltip-eccen").html("Eccentricity of orbit: " + d.e);
-		// 	d3.select("#tooltip-radius").html("Radius of planet: " + formatSI(d.Radius * 11.209 ) + " Earth radii");
-		// 	d3.select("#tooltip-dist").html("Approx. distance to its Star: " + formatSI(d.major/3000) + " au");
-		// }//showTooltip	
