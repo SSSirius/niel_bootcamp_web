@@ -7,12 +7,34 @@
 	
 </head>
 <body>
+<div>
+<div class="welcome-bg"> 
+	<div class="welcome"> 
+		<div class="welcome-title">
+			Mythology in the Solar System
+		</div>
+		<div>
+		  <div class="welcome-gif">
+			<img src="img/planets.gif" width="100%">
+			</div>
+			<div class="welcome-text">
+				<p>When you call out the name of every planet in the solar system, do you konw that thay are driven from myths? </p>
+				<p>Go and check the mythology in the solar system!</p>
+			</div>
+			<div class="welcome-btn" onclick="hideW()">
+				Let's start!
+			</div>
+		</div>
 
+
+	</div>
+</div>
+<div class="title">Mythology in the Solar System</div>
 
 
 <div id="tooltip">
 		<div class="tooltip-Container">
-		<div class="tooltip-cancel">&times;</div> 
+		<div class="tooltip-cancel" id="11" onclick="cancel()">&times;</div> 
 			<div class="tooltip-planet"></div>
 			<div class="tooltip-rule"></div>
 			<div class="tooltip-symbol"></div>
@@ -24,11 +46,15 @@
 			
 
 			<div class="tooltip-intro"></div> 
-			<div class="tooltip-img"><img id ="detail-img" width="100%" /></div>
+			<div class="tooltip-img">
+				<img id ="detail-img" width="100%" />
+			</div>
 			
 			</div>
 		</div>
 	</div>
+	</div>
+	<div class="footer">2017 Bootcamp  by Luqi NIE</div>
 </body>
 <script src="js/d3/d3.js" type="text/javascript" charset="utf-8" ></script>
 	<script src="https://d3js.org/d3.v3.min.js"></script>

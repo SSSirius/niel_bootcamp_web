@@ -18,19 +18,15 @@ function updateWindow(){
 	y = (w.innerHeight|| e.clientHeight|| g.clientHeight)-10;
 
 	svg.attr("width", x).attr("height", y);
-	// d3.selectAll(".container").attr("transform", "translate3d(2,2,0)");
+d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")")
+	}
 
-	d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")")
-					// .attr("transform", "rotateX(-90deg)");
-	// d3.selectAll(".legendContainer").attr("transform", "translate(" + 30 + "," + (y - 90) + ")");
-	// d3.select("#crazy").style("left", (x/2 - 112/2 + 6) + "px").style("top", (y/2 - 100) + "px");
-	//d3.selectAll(".introWrapper").attr("transform", "translate(" + -x/2 + "," + -y/2 + ")");
+function hideW(){
+		d3.select(".welcome-bg").style("visibility","hidden")
+								.style("width","0")
+
 }
 
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////// Initiate elements ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////
 
 var stopTooltip = false;	
 //Planet orbit variables
@@ -65,38 +61,28 @@ var ImageWidth = radiusSun/au * 3000 * (2.7/1.5);
 
 //d3.json("exoplanets.json", function(error, planets) {
 // var orbits =[
-			
-			
-// 			{name:"saturnO",cx:0,cy:0,major:475,minor:475,Radius:4},
-// 			{name:"jupiterO",cx:0,cy:0,major:260,minor:260,Radius:4},
-// 			{name:"marsO",cx:0,cy:0,major:75,minor:75,Radius:4},
-// 			{name:"earthO",cx:0,cy:0,major:50,minor:50,Radius:4},
-// 			{name:"venusO",cx:0,cy:0,major:35,minor:35,Radius:4},
-// 			{name:"mercuryO",cx:0,cy:0,major:20,minor:20,Radius:4}
 
-
-// 			]
 var orbits =[
-			{name:"7",cx:0,cy:0,speed:0.009,major:350,minor:175,Radius:4},
-			{name:"6",cx:0,cy:0,speed:0.0177,major:292,minor:147.55,Radius:4},
-			{name:"5",cx:0,cy:0,speed:0.05,major:132,minor:66,Radius:4},
-			{name:"4",cx:0,cy:0,speed:0.127,major:92,minor:46,Radius:4},
-			{name:"3",cx:0,cy:0,speed:0.8,major:58,minor:29,Radius:4},
-			{name:"2",cx:0,cy:0,speed:1.5,major:52,minor:26,Radius:4},
-			{name:"1",cx:0,cy:0,speed:2.43,major:48,minor:24,Radius:4},
-			{name:"0",cx:0,cy:0,speed:6.2,major:45,minor:22.5,Radius:4}
+			{name:"neptuneo",index:7,cx:0,cy:0,speed:0.009,major:350,minor:175,Radius:4},
+			{name:"uranuso",index:6,cx:0,cy:0,speed:0.0177,major:292,minor:147.55,Radius:4},
+			{name:"saturno",index:5,cx:0,cy:0,speed:0.05,major:132,minor:66,Radius:4},
+			{name:"jupitero",index:4,cx:0,cy:0,speed:0.127,major:92,minor:46,Radius:4},
+			{name:"marso",index:3,cx:0,cy:0,speed:0.8,major:58,minor:29,Radius:4},
+			{name:"eartho",index:2,cx:0,cy:0,speed:1.5,major:52,minor:26,Radius:4},
+			{name:"venuso",index:1,cx:0,cy:0,speed:2.43,major:48,minor:24,Radius:4},
+			{name:"mercuryo",index:0,cx:0,cy:0,speed:6.2,major:45,minor:22.5,Radius:4}
 
 			]
 
 var planets =[  
-				{name:"mercury",Radius:10,orbit:35,speed:6.2,x:-45,y:-22.5,href:"img/mercury.png"},
-				{name:"venus",Radius:10,orbit:48,speed:2.43,x:48,y:24,href:"img/venus.png"},
-				{name:"earth",Radius:10,orbit:52,speed:1.5,x:-52,y:-26,href:"img/earth.png"},
-				{name:"mars",Radius:10,orbit:58,speed:0.8,x:-58,y:-29,href:"img/mars.png"},
-				{name:"jupiter",Radius:50,orbit:92,speed:0.127,x:-92,y:-46,href:"img/jupiter.png"},
-				{name:"saturn",Radius:80,orbit:132,speed:0.05,x:132,y:66,href:"img/saturn.png"},
-				{name:"uranus",Radius:10,orbit:292,speed:0.0177,x:-292,y:-147.55,href:"img/uranus.png"},
-				{name:"neptune",Radius:8,orbit:350,speed:0.009,x:350,y:175,href:"img/neptune.png"}
+				{name:"mercury",index:0,Radius:4,orbit:35,speed:6.2,x:-45,y:-22.5,href:"img/mercury.png"},
+				{name:"venus",index:1,Radius:10,orbit:48,speed:2.43,x:48,y:24,href:"img/venus.png"},
+				{name:"earth",index:2,Radius:10,orbit:52,speed:1.5,x:-52,y:-26,href:"img/earth.png"},
+				{name:"mars",index:3,Radius:8,orbit:58,speed:0.8,x:-58,y:-29,href:"img/mars.png"},
+				{name:"jupiter",index:4,Radius:50,orbit:92,speed:0.127,x:-92,y:-46,href:"img/jupiter.png"},
+				{name:"saturn",index:5,Radius:80,orbit:132,speed:0.05,x:132,y:66,href:"img/saturn.png"},
+				{name:"uranus",index:6,Radius:20,orbit:292,speed:0.0177,x:-292,y:-147.55,href:"img/uranus.png"},
+				{name:"neptune",index:7,Radius:20,orbit:350,speed:0.009,x:350,y:175,href:"img/neptune.png"}
 				// {name:"saturn",Radius:60,orbit:300,speed:0.05,x:-300,y:-300,href:"img/saturn.png"},
 				// {name:"jupiter",Radius:28,orbit:174.7,speed:0.127,x:-174.7,y:-174.7,href:"img/jupiter.png"},
 				// {name:"mars",Radius:15,orbit:67,speed:0.8,x:-67,y:-67,href:"img/mars.png"},
@@ -107,14 +93,14 @@ var planets =[
 
 
 var planetinfro =[  
-			{name:"mercury",back:"God of financial gain, commerce and luck",symbol:"☿",speed:"47.362 km/s",href:"img/mercury.jpeg"},
-			{name:"venus",back:"Goddess of love, beauty, desire, sex, fertility, prosperity and victory",symbol:"♀",speed:"35.02 km/s",href:"img/venus.jpg"},
-			{name:"earth",back:"Primordial Deity of the Earth",symbol:"⨁",speed:"29.78 km/s",href:"img/gaea.jpg"},
-			{name:"mars",back:"Roman god of war",symbol:"♂",speed:"24.077 km/s",href:"img/mars.jpg"},
-			{name:"jupiter",back:"God of the sky and lightning",symbol:"♃",speed:"13.07 km/s",href:"img/jupiter.jpg"},
-			{name:"saturn",back:"Titan of Capitol, wealth, agriculture, liberation, and time",symbol:"♄",speed:"9.69 km/s ",href:"img/saturn.jpg"},
-			{name:"uranus",back:"Primordial god of the sky",symbol:"♅",speed:"6.81km/s",href:"img/uranus.jpg"},
-			{name:"neptune",back:"god of freshwater and the sea",symbol:"♆",speed:"5.43 km/s",href:"img/neptune.jpg"}]
+			{name:"mercury",back:"the Messenger to the Gods",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mercury is the smallest and innermost planet in the Solar System. Its orbital period around the Sun of 88 days is the shortest of all the planets in the Solar System.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It is named after the Roman deity Mercury, the messenger to the gods. Mercury is a major Roman god, being one of the Dii Consentes within the ancient Roman pantheon.</p>",symbol:"☿",speed:"47.362 km/s",href:"img/mercury.jpeg"},
+			{name:"venus",back:"Goddess of Love, Beauty and Victory",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Venus is the second planet from the Sun, orbiting it every 224.7 Earth days.It has the longest rotation period (243 days) of any planet in the Solar System and rotates in the opposite direction to most other planets. It has no natural satellites.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is named after the Roman goddess of love and beauty. Venus, in Roman mythology, she was the mother of the Roman people through her son, Aeneas, who survived the fall of Troy and fled to Italy.</p>",symbol:"♀",speed:"35.02 km/s",href:"img/venus.jpg"},
+			{name:"earth",back:"Primordial Deity of the Earth",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earth is the third planet from the Sun and the only object in the Universe known to harbor life.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In Greek mythology, Gaia is the ancestral mother of all life: the primal Mother Earth goddess.</p>",symbol:"⨁",speed:"29.78 km/s",href:"img/gaea.jpg"},
+			{name:"mars",back:"Roman God of War",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In ancient Roman religion and myth, Mars was the god of war and also an agricultural guardian, a combination characteristic of early Rome. He was second in importance only to Jupiter and he was the most prominent of the military gods in the religion of the Roman army. </p>",symbol:"♂",speed:"24.077 km/s",href:"img/mars.jpg"},
+			{name:"jupiter",back:"God of the Sky and Lightning",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a giant planet with a massive one-thousandth that of the Sun, but two times of all the other planets in the Solar System combined.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Romans named it after their god Jupiter. Jupiter is the god of the sky and thunder and king of the gods in Ancient Roman religion and mythology. Jupiter was the chief deity of Roman state throughout the Republican and Imperial eras.</p>",symbol:"♃",speed:"13.07 km/s",href:"img/jupiter.jpg"},
+			{name:"saturn",back:"Titan of Capitol, Wealth, Agriculture, Liberation, and Time",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturn is the sixth planet from the Sun and the second largest in the Solar System, after Jupiter. Saturn is named after the Roman god of agriculture.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturn is a god in ancient, a religion, and a character in myth as a god of generation, dissolution, plenty, wealth, agriculture, periodic renewal and liberation. </p>",symbol:"♄",speed:"9.69 km/s ",href:"img/saturn.jpg"},
+			{name:"uranus",back:"Primordial God of the Sky",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uranus is the seventh planet from the Sun. It has the third-largest planetary radius and fourth largest planetary mass in the Solar System.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uranus was the primal Greek god personifying the sky. His name in Roman mythology was Caelus.</p>",symbol:"♅",speed:"6.81km/s",href:"img/uranus.jpg"},
+			{name:"neptune",back:"God of Water and the Sea",detail:"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neptune is the eighth and farthest known planet from the Sun in the Solar System. </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is named after the Roman god of the sea and has the astronomical symbol ♆, a stylised version of the god Neptune's trident. Neptune was the god of freshwater and the sea in Roman religion. He is the counterpart of the Greek god Poseidon.</p>",symbol:"♆",speed:"5.43 km/s",href:"img/neptune.jpg"}]
 
 //Create color gradient for planets based on the temperature of the star that they orbit
 var colors = ["#FB1108","#FD150B","#FA7806","#FBE426","#FCFB8F","#F3F5E7","#C7E4EA","#ABD6E6","#9AD2E1","#42A1C1","#1C5FA5", "#172484"];
@@ -134,10 +120,11 @@ var formatSI = d3.format(".2f");
 //Drawing a line for the orbit
 
 var orbitsContainer = container.append("g").attr("class","orbitsContainer");
-var orbits = orbitsContainer.selectAll("g.orbit")
+var orbitsall = orbitsContainer.selectAll("g.orbit")
 				.data(orbits).enter().append("ellipse")
 				.attr("class", "orbit")
 				.attr("id", function(d) {return d.name;})
+				.attr("index", function(d) {return d.index;})
 				.attr("cx", function(d) {return d.cx;})
 				.attr("cy", function(d) {return d.cy;})
 				.attr("rx", function(d) {return d.major*2.2;})
@@ -158,6 +145,7 @@ var planetContainer = container.append("g").attr("class","planetContainer");
 				var ifscale = false;
 				allplanets = planetContainer.selectAll("image")
 				.data(planets).enter().append("image")
+				.attr("index", function(d) {return d.index;})
 				.attr("class", "planet")
 				.attr("x",function(d) {return d.x;})
 				.attr("y", function(d) {return d.y;})
@@ -167,23 +155,23 @@ var planetContainer = container.append("g").attr("class","planetContainer");
 				.attr("height", function(d) {return d.Radius} )
 				.attr("text-anchor", "middle")
 				.on("click", pause)
-				function scaleLarge(d){
+				// function scaleLarge(d){
 		
-				}
-				function planetOver(d){
-					// orbit.stop();
-					// d3.select(this).style("fill-opacity", 0.1);
-					d3.select(this).style("stroke", "white")
-					.style("stroke-width", "2px")
-					// d3.selectAll(".container").attr("transform", "translate(" + this.cx + "," + this.cy+ ")");
-				}
-				function planetOut(){
-					d3.select(this).style("stroke", "#bbb")
-					.style("stroke-width", "0.5px")
-					// d3.select(this).style("fill-opacity", 0);
-					// Draw1();
-					// d3.select(this).style("background","#fff");
-				}
+				// }
+				// function planetOver(d){
+				// 	// orbit.stop();
+				// 	// d3.select(this).style("fill-opacity", 0.1);
+				// 	d3.select(this).style("stroke", "white")
+				// 	.style("stroke-width", "2px")
+				// 	// d3.selectAll(".container").attr("transform", "translate(" + this.cx + "," + this.cy+ ")");
+				// }
+				// function planetOut(){
+				// 	d3.select(this).style("stroke", "#bbb")
+				// 	.style("stroke-width", "0.5px")
+				// 	// d3.select(this).style("fill-opacity", 0);
+				// 	// Draw1();
+				// 	// d3.select(this).style("background","#fff");
+				// }
 				planetContainer.append("g:image")
 	.attr("x", -ImageWidth*1.2)
 	.attr("y", -ImageWidth*1.2)
@@ -238,14 +226,17 @@ var countstep= 0;
 
 // console.log(isstart);
  function pause(d) {
- 	var d= Number(d3.select(this).attr("id"));
+ 	var ind= Number(d3.select(this).attr("index"));
  	var x = (w.innerWidth || e.clientWidth || g.clientWidth)/2;
 	var y = (w.innerHeight|| e.clientHeight|| g.clientHeight)/2;
-	var pl = planets[d];
-	var pinfo =planetinfro[d];
+	var pl = planets[ind];
+	d3.select("#tooltip")
+				.style("top", y +"px")
+				.style("left", x +"px");
+	var pinfo =planetinfro[ind];
 	var newx = -pl.x*2.2 * Math.sin(counter*pl.speed*Math.PI/180)-pl.Radius/2;
 	var newy = -pl.y*1.5* Math.cos(counter*pl.speed*Math.PI/180)-pl.Radius/2;
-								
+	// var orbitid = d3.selectAll(".orbit")[0][d];	
 		if(isstart)
 			{isstart = false;
 				// var x1= Number(d3.select(this).attr("x"));
@@ -255,21 +246,29 @@ var countstep= 0;
 				.style("visibility", "visible")
 				.style("top", y + newy +"px")
 				.style("left", x+ newx +"px");
-				 console.log(y + newx);
-				 console.log(pl);
+				 // console.log(y + newx);
+				 // console.log(pl);
+		 	    d3.select(".tooltip-cancel").style("visibility", "hidden");
 
              // d3.select(this).style("fill-opacity", 0.1);
-				d3.select(this).style("stroke", "white")
-					.style("stroke-width", "2px");
+				// d3.select("#"+ orbitid).style("stroke", "white")
+					      // .style("stroke-width", "2px");
+					      d3.selectAll(".orbit")
+					      .filter(function (d, i){if(i==7-ind){return d}})
+					      .style("stroke", "white")
+					      .style("stroke-width", "2px");
+					      console.log(    d3.selectAll(".orbit").filter(function (d, i) { return i === d;}));
 //intro of it.  
 				d3.select(".tooltip-Container").attr("onclick", "detailInfo("+d+")");
 				d3.select("#tooltip .tooltip-planet").text(pinfo.name +"  " +pinfo.symbol);
 				d3.select("#tooltip .tooltip-symbol").html();
 				d3.select("#tooltip-radius").html(pinfo.speed);
 				d3.select("#tooltip-back").html(pinfo.back);
+				d3.select(".tooltip-intro").html(pinfo.detail);
 				d3.select(".moreInfo").attr("class","tooltip-Container");
 				d3.select("#tooltip-more").style("height","0px");
                 d3.select("#detail-img").attr("src",pinfo.href);
+                
 				}
 		else {
 		 	isstart = true;
@@ -279,18 +278,31 @@ var countstep= 0;
 		 	.style("top", y  +"px")
 			.style("left", x +"px")
 			.style("visibility", "hidden");
-            d3.select(this).style("stroke", "#bbb")
+            d3.selectAll(".orbit").style("stroke", "#bbb")
 					.style("stroke-width", "0.5px")
 			d3.select(".tooltip-cancel").style("visibility", "hidden");
 			
 			// d3.select(".moreInfo").attr("class","tooltip-Container");
 		 } 
 		};
+		function cancel(){
+			isstart = true;
+		 	Draw1();
+		 	d3.select(".tooltip-cancel").style("visibility", "hidden");
+		 	d3.select("#tooltip")
+		 	.transition().duration(400)
+		 	.style("top", y  +"px")
+			.style("left", x +"px")
+			.style("visibility", "hidden");
+            d3.selectAll(".orbit").style("stroke", "#bbb")
+					.style("stroke-width", "0.5px");
+			
+			// d3.select(".tooltip-cancel").style("visibility","hidden");
+		}
 
-
-		function detailInfo(d){
-			var pl = planets[d];
-	var pinfo =planetinfro[d];
+   function detailInfo(d){
+		var pl = planets[d];
+	    var pinfo =planetinfro[d];
 			console.log(d);
 			d3.select(".tooltip-Container").attr("class","moreInfo");
 			d3.select("#tooltip").style("top","20%");
@@ -298,6 +310,7 @@ var countstep= 0;
 			
 			d3.select("#tooltip-more").style("height","97%");
 			d3.select(".tooltip-cancel").style("visibility", "visible");
+		
 			
 
 		}
@@ -306,7 +319,7 @@ var countstep= 0;
 //Scaling radii	
 function Draw1() {
    
-	startCircle(time = 5);
+	// startCircle(time = 5);
    
 		
 	d3.selectAll(".planet")
@@ -336,60 +349,60 @@ function Draw1() {
 
 
 		//Show the tooltip on hover
-		function showTooltip(d) {	
-			//Show how to close tooltip
-			d3.select("#tooltipInfo").style("visibility", "visible");
+		// function showTooltip(d) {	
+		// 	//Show how to close tooltip
+		// 	d3.select("#tooltipInfo").style("visibility", "visible");
 			
-			//Make a different offset for really small planets
-			//var Offset = (rScale(d.Radius)/2 < 2) ? 3 : rScale(d.Radius)/2;
-			var xOffset = ((10*d.Radius)/2 < 3) ? 6 : (10*d.Radius)/2;
-			var yOffset = ((10*d.Radius)/2 < 3) ? 0 : (10*d.Radius)/2;
+		// 	//Make a different offset for really small planets
+		// 	//var Offset = (rScale(d.Radius)/2 < 2) ? 3 : rScale(d.Radius)/2;
+		// 	var xOffset = ((10*d.Radius)/2 < 3) ? 6 : (10*d.Radius)/2;
+		// 	var yOffset = ((10*d.Radius)/2 < 3) ? 0 : (10*d.Radius)/2;
 
-			//Set first location of tooltip and change opacity
-			var xpos = d.x + x/2 - xOffset + 3;
-			var ypos = d.y + y/2 - yOffset - 5;
+		// 	//Set first location of tooltip and change opacity
+		// 	var xpos = d.x + x/2 - xOffset + 3;
+		// 	var ypos = d.y + y/2 - yOffset - 5;
 			  
-			d3.select("#tooltip")
-				.style('top',ypos+"px")
-				.style('left',xpos+"px")
-				.transition().duration(500)
-				.style('opacity',1);
+		// 	d3.select("#tooltip")
+		// 		.style('top',ypos+"px")
+		// 		.style('left',xpos+"px")
+		// 		.transition().duration(500)
+		// 		.style('opacity',1);
 				
-			//Keep the tooltip moving with the planet, until stopTooltip 
-			//returns true (when the user clicks)
-			d3.timer(function() { 
-			  xpos = d.x + x/2 - xOffset + 3;
-			  ypos = d.y + y/2 - yOffset - 5;
+		// 	//Keep the tooltip moving with the planet, until stopTooltip 
+		// 	//returns true (when the user clicks)
+		// 	d3.timer(function() { 
+		// 	  xpos = d.x + x/2 - xOffset + 3;
+		// 	  ypos = d.y + y/2 - yOffset - 5;
 			  
-			 //Keep changing the location of the tooltip
-			 d3.select("#tooltip")
-				.style('top',ypos+"px")
-				.style('left',xpos+"px");
+		// 	 //Keep changing the location of the tooltip
+		// 	 d3.select("#tooltip")
+		// 		.style('top',ypos+"px")
+		// 		.style('left',xpos+"px");
 			
-				//Breaks from the timer function when stopTooltip is changed to true
-				//by another function
-				if (stopTooltip == true) { 
-					//Hide tooltip info again
-					d3.select("#tooltipInfo").style("visibility", "hidden");
-					//Hide tooltip
-					d3.select("#tooltip").transition().duration(300)
-						.style('opacity',0)
-						.call(endall, function() { //Move tooltip out of the way
-							d3.select("#tooltip")
-								.style('top',0+"px")
-								.style('left',0+"px");
-						});	
-					//Remove show how to close
-					return stopTooltip;
-				}
-			});
+		// 		//Breaks from the timer function when stopTooltip is changed to true
+		// 		//by another function
+		// 		if (stopTooltip == true) { 
+		// 			//Hide tooltip info again
+		// 			d3.select("#tooltipInfo").style("visibility", "hidden");
+		// 			//Hide tooltip
+		// 			d3.select("#tooltip").transition().duration(300)
+		// 				.style('opacity',0)
+		// 				.call(endall, function() { //Move tooltip out of the way
+		// 					d3.select("#tooltip")
+		// 						.style('top',0+"px")
+		// 						.style('left',0+"px");
+		// 				});	
+		// 			//Remove show how to close
+		// 			return stopTooltip;
+		// 		}
+		// 	});
 		
-			//Change the texts inside the tooltip
-			d3.select("#tooltip .tooltip-planet").text(d.name);
-			d3.select("#tooltip .tooltip-year").html("Discovered in: " + d.discovered);
-			//d3.select("#tooltip-class").html("Temperature of star: " + d.temp + " Kelvin");
-			d3.select("#tooltip-period").html("Orbital period: " + formatSI(d.period) + " days");
-			d3.select("#tooltip-eccen").html("Eccentricity of orbit: " + d.e);
-			d3.select("#tooltip-radius").html("Radius of planet: " + formatSI(d.Radius * 11.209 ) + " Earth radii");
-			d3.select("#tooltip-dist").html("Approx. distance to its Star: " + formatSI(d.major/3000) + " au");
-		}//showTooltip	
+		// 	//Change the texts inside the tooltip
+		// 	d3.select("#tooltip .tooltip-planet").text(d.name);
+		// 	d3.select("#tooltip .tooltip-year").html("Discovered in: " + d.discovered);
+		// 	//d3.select("#tooltip-class").html("Temperature of star: " + d.temp + " Kelvin");
+		// 	d3.select("#tooltip-period").html("Orbital period: " + formatSI(d.period) + " days");
+		// 	d3.select("#tooltip-eccen").html("Eccentricity of orbit: " + d.e);
+		// 	d3.select("#tooltip-radius").html("Radius of planet: " + formatSI(d.Radius * 11.209 ) + " Earth radii");
+		// 	d3.select("#tooltip-dist").html("Approx. distance to its Star: " + formatSI(d.major/3000) + " au");
+		// }//showTooltip	
