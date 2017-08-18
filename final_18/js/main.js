@@ -384,6 +384,7 @@ function Draw1() {
     if (isZoom){
     	t=setTimeout("SetZoom("+olda+")",50);
     	} else {
+    		olda=8;
     		updateWindow()
     	}
 
