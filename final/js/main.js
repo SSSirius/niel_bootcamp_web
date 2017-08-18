@@ -24,6 +24,7 @@ d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")
 function hideW(){
 		d3.select(".welcome-bg").style("visibility","hidden")
 								.style("width","0")
+								.style("height","0");
 
 }
 
@@ -123,10 +124,10 @@ var orbitsall = orbitsContainer.selectAll("g.orbit")
 				.style("stroke", "#bbb")
 				.style("stroke-opacity", 0.3)
 				.style("stroke-width", "0.5px")
-				// .on("mouseover", planetOver)
-				.on("click", pause);
+				 .on("mouseover", planetOver)
+				.on("click", pause)
 				// .on("mouseover", pause);
-				// .on("mouseout", planetOut);
+				.on("mouseout", planetOut);
 
 //Drawing the planets			
 var planetContainer = container.append("g").attr("class","planetContainer");
@@ -161,11 +162,6 @@ var planetContainer = container.append("g").attr("class","planetContainer");
 
 function startCircle(time) {
 
-	//Stop click event
-	// d3.select(".progressWrapper")
-	// 	.style("pointer-events", "none");
-		
-	//Dim the play button
 	d3.selectAll(".play")
 		.transition().delay(0).duration(500)
 		.style("opacity", 1)
@@ -196,6 +192,20 @@ Draw1();
 var countstep= 0;
 
 // console.log(isstart);
+	function planetOver(d){
+		if(isstart){
+		 d3.select(this).style("stroke", "white")
+					     .style("stroke-width", "2px");
+		} else{}
+
+	}
+	function planetOut(d){
+		 if(isstart){d3.selectAll(".orbit").style("stroke", "#bbb")
+					.style("stroke-width", "0.5px")
+			}
+	}
+
+
  function pause(d) {
  	var ind= Number(d3.select(this).attr("index"));
  	var x = (w.innerWidth || e.clientWidth || g.clientWidth)/2;
@@ -205,8 +215,11 @@ var countstep= 0;
 				.style("top", y +"px")
 				.style("left", x +"px");
 	var pinfo =planetinfro[ind];
-	var newx = -pl.x*2.2 * Math.sin(counter*pl.speed*Math.PI/180)-pl.Radius/2;
-	var newy = -pl.y*1.5* Math.cos(counter*pl.speed*Math.PI/180)-pl.Radius/2;
+	// var newx = -pl.x*2.2 * Math.sin(counter*pl.speed*Math.PI/180)-pl.Radius/2;
+	// var newy = -pl.y*1.5* Math.cos(counter*pl.speed*Math.PI/180)-pl.Radius/2;
+	var newx=parseFloat(d3.selectAll(".planet").filter(function (d, i){if(i==ind){return d}}).attr("x"))
+	var newy=parseFloat(d3.selectAll(".planet").filter(function (d, i){if(i==ind){return d}}).attr("y"))
+
 	// var orbitid = d3.selectAll(".orbit")[0][d];	
 		if(isstart)
 			{isstart = false;
@@ -234,6 +247,8 @@ var countstep= 0;
 				d3.select(".moreInfo").attr("class","tooltip-Container");
 				d3.select("#tooltip-more").style("height","0px");
                 d3.select("#detail-img").attr("src",pinfo.href);
+                d3.select(".fa-caret-down").style("height","3px")
+                							.style("visibility","visible");
                 
 				}
 		else {
@@ -262,7 +277,8 @@ var countstep= 0;
 			.style("visibility", "hidden");
             d3.selectAll(".orbit").style("stroke", "#bbb")
 					.style("stroke-width", "0.5px");
-			
+			d3.select(".fa-caret-down").style("height","0px")
+                							.style("visibility","hidden");
 			// d3.select(".tooltip-cancel").style("visibility","hidden");
 		}
 
@@ -276,12 +292,13 @@ var countstep= 0;
 			
 			d3.select("#tooltip-more").style("height","97%");
 			d3.select(".tooltip-cancel").style("visibility", "visible");
-		
+		    d3.select(".fa-caret-down").style("height","0px")
+                							.style("visibility","hidden");
 			
 
 		}
 
-
+var isZoom =false;
 function Draw1() {
    
 		
@@ -305,5 +322,74 @@ function Draw1() {
 		    t=setTimeout("Draw1()",50);}
 	
        }
+   var olda=8;
+
+  function zoomIn(a){
+  	a = parseInt(a);
+  	if (olda == a){
+  		d3.selectAll(".f-btn").attr("class","f-btn"); 
+				
+  		a=olda;
+  		isZoom=false;
+  		// d3.select(this).attr("class","f-btn")
+  		x = (w.innerWidth || e.clientWidth || g.clientWidth) - 10;
+	    y = (w.innerHeight|| e.clientHeight|| g.clientHeight)-10;
+
+	// svg.attr("width", x).attr("height", y);
+       // d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")");
+	console.log(1);
+
+
+	}
+  	
+  		else{
+  			d3.selectAll(".f-btn").attr("class","f-btn"); 
+  			var even = document.getElementsByClassName("f-btn")[a];
+  			// var even=d3.selectAll(".f-btn").filter(function (d, i){ return i; })
+  	 		olda = a;
+             even.setAttribute("class","f-btn active");
+
+  	 //  = d3.selectAll("a").filter(function(d, i) { return i; });
+  	 // var bbtna=d3.selectAll("a").filter(function (d, i){if(i==a){return d}});
+// .attr("class","active");
+  			// d3.select(this).attr("class","f-btn active");
+  	    console.log(even);
+  	   	t=setTimeout("SetZoom("+a+")",50);
+  	    isZoom=true;
+  	   	}
+  	   
+  	   }
+       // 	    console.log( a);}
+       // } 
+       // olda = a;
+       // isZoom=false;
+   
+    function SetZoom(a){
+	a = parseInt(a);
+  		// olda= a;
+  	var x =parseFloat( (w.innerWidth || e.clientWidth || g.clientWidth));
+	var y = parseFloat((w.innerHeight|| e.clientHeight|| g.clientHeight));
+    var pl = planets[a];
+    var newx = -pl.x*2.2 * Math.sin(counter*pl.speed*Math.PI/180)-pl.Radius/2;
+	var newy = -pl.y*1.5* Math.cos(counter*pl.speed*Math.PI/180)-pl.Radius/2;
+	var zoomx = x- newx*8;
+	var zoomy = y- newy*8;
+// d3.selectAll(".f-btn").filter(function (d, i){if(i==a){return d}})
+// .attr("class","active");
+
+    
+ //    var zoomx = x- parseFloat(d3.selectAll(".planet").filter(function (d, i){if(i==a){return d}}).attr("x"))*8;
+	// var zoomy = y- parseFloat(d3.selectAll(".planet").filter(function (d, i){if(i==a){return d}}).attr("y"))*8;
+    d3.selectAll(".container").attr("transform", "  translate(" + zoomx/2 +"," + zoomy/2 + ") scale(4)")
+    if (isZoom){
+    	t=setTimeout("SetZoom("+olda+")",50);
+    	} else {
+    		updateWindow()
+    	}
+
+    	}
+					     
+  
+  
 
 

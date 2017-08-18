@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<title>Myths in the Solar System</title>
+	
+</head>
+<body>
+<div>
+<div class="welcome-bg"> 
+	<div class="welcome"> 
+		<div class="welcome-title">
+			Myths in the Solar System
+		</div>
+		<div>
+		  <div class="welcome-gif">
+			<img src="img/planets.gif" width="100%">
+			</div>
+			<div class="welcome-text">
+				<p>When you call out the name of every planet in the solar system, do you konw that thay are driven from myths? </p>
+				<p>Go and check the myths in the solar system!</p>
+			</div>
+			<div class="welcome-btn" onclick="hideW()">
+				Let's start!
+			</div>
+		</div>
+
+
+	</div>
+</div>
+<div class="title">Myths in the Solar System</div>
+
+
+<div id="tooltip">
+		<div class="tooltip-Container">
+		<div class="tooltip-cancel" id="11" onclick="cancel()">&times;</div> 
+			<div class="tooltip-planet"></div>
+			<div class="tooltip-rule"></div>
+			<div class="tooltip-symbol"></div>
+			
+			<div id="tooltip-back" 	class="tooltip-info"></div>
+			<div id="tooltip-radius"	class="tooltip-speed"></div>
+			<!-- <div class="tooltip-speed"></div> -->
+			<i class="fa fa-caret-down" aria-hidden="true"></i>
+			<div id="tooltip-more">		
+			
+
+			<div class="tooltip-intro"></div> 
+			<div class="tooltip-img">
+				<img id ="detail-img" width="100%" />
+			</div>
+			
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="footer-btn">
+	
+		<div class="f-btn"  onclick="zoomIn(0)" index="0">mercury</div>
+		<div class="f-btn" onclick="zoomIn(1)">venus</div>
+		<div class="f-btn" onclick="zoomIn(2)">earth</div>
+		<div class="f-btn" onclick="zoomIn(3)">
+		mars</div>
+		<div class="f-btn" onclick="zoomIn(4)" index="0">jupiter</div>
+		<div class="f-btn" onclick="zoomIn(5)">saturn</div>
+		<div class="f-btn" onclick="zoomIn(6)">uranus</div>
+		<div class="f-btn"  onclick="zoomIn(7)">neptune</div>
+	</div>
+	<div class="footer">2017 Bootcamp  by Luqi NIE</div>
+</body>
+<script src="js/d3/d3.js" type="text/javascript" charset="utf-8" ></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="js/main.js" type="text/javascript"  ></script>
+</html>
