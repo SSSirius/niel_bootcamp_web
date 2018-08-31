@@ -330,7 +330,7 @@ svg{
     height: 60%;
     margin-bottom: 2px;
     padding:8% 5% 8% 10%;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
  
 }
 .tooltip-intro p{
